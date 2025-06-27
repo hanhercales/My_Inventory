@@ -245,8 +245,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ef207dfc892e954c9371b6f3a38a7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: c19d7e2383a0e2d4394078f530860ac2, type: 2}
+  item: {fileID: 11400000, guid: b6fe0996a44e4f347bbc54337281581c, type: 2}
   quantity: 1
+  targetInventory: {fileID: 0}
 --- !u!58 &754591403
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -433,6 +434,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca30bf4a6bec71548a93a04e7403ff49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventoryType: 1
   content: []
 --- !u!4 &1858911610
 Transform:
