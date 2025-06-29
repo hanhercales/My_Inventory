@@ -7,6 +7,8 @@ public class Inventory : MonoBehaviour
     
     public InventoryType inventoryType = InventoryType.Main;
     public List<ItemInstance> content = new List<ItemInstance>();
+    public int maxRuneCapacity;
+    public int currentRuneCapacity = 0;
     public event System.Action OnInventoryChanged;
     
     public enum InventoryType
@@ -14,6 +16,7 @@ public class Inventory : MonoBehaviour
         Main,
         Equipment
     }
+    
     public bool AddItem(Item item, int quantity = 1)
     {
         if (item == null) return false;
@@ -58,7 +61,7 @@ public class Inventory : MonoBehaviour
         {
             itemInstanceToRemove.RemoveQuantity(quantity);
 
-            if (itemInstanceToRemove.quantity < 0)
+            if (itemInstanceToRemove.quantity <= 0)
             {
                 content.Remove(itemInstanceToRemove);
             }
@@ -67,6 +70,30 @@ public class Inventory : MonoBehaviour
         }
         
         return false;
+    }
+
+    public bool EquipItem(ItemInstance itemInstance)
+    {
+        EquipmentItem runeItem = itemInstance.item as EquipmentItem;
+        
+        runeItem.Equip(itemInstance);
+        
+        itemInstance = new ItemInstance(runeItem, itemInstance.runeLevel, itemInstance.runeCost);
+        
+        OnInventoryChanged?.Invoke();
+        return true;
+    }
+    
+    public bool UnequipItem(ItemInstance itemInstance)
+    {
+        EquipmentItem runeItem = itemInstance.item as EquipmentItem;
+        
+        runeItem.Unequip(itemInstance);
+        
+        itemInstance = new ItemInstance(runeItem, itemInstance.runeLevel, itemInstance.runeCost);
+        
+        OnInventoryChanged?.Invoke();
+        return true;
     }
     
     public ItemInstance GenerateRune(EquipmentItem runeItem)

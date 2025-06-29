@@ -436,6 +436,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryType: 1
   content: []
+  maxRuneCapacity: 128
+  currentRuneCapacity: 0
 --- !u!4 &1858911610
 Transform:
   m_ObjectHideFlags: 0

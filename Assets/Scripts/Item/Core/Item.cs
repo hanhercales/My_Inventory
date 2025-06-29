@@ -12,7 +12,8 @@ public abstract class Item : ScriptableObject
     public Sprite itemIcon;
     public ItemType itemType;
 
-    [Header("Inventory Info")] public string targetInventoryName = "Inventory";
+    [Header("Inventory Info")] 
+    public string targetInventoryName = "MainInventory";
     
     public enum ItemType
     {

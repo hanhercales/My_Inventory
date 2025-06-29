@@ -19,9 +19,34 @@ public class EquipmentItem : Item
         Speed,
     }
 
-    public void Equip(int level, int cost)
+    public bool Equip(ItemInstance itemInstance)
     {
+        Inventory targetInventory = GameObject.Find(targetInventoryName).GetComponent<Inventory>();
         
+        if(itemInstance == null || itemInstance.item.itemType != Item.ItemType.Rune) return false;
+        
+        if (targetInventory.currentRuneCapacity >= targetInventory.maxRuneCapacity || 
+            targetInventory.maxRuneCapacity - targetInventory.currentRuneCapacity < itemInstance.runeCost) 
+            return false;
+        
+        itemInstance.isEquipped = true;
+        targetInventory.currentRuneCapacity += itemInstance.runeCost;
+        return true;
+    }
+
+    public bool Unequip(ItemInstance itemInstance)
+    {
+        Inventory targetInventory = GameObject.Find(targetInventoryName).GetComponent<Inventory>();
+        
+        if(itemInstance == null || itemInstance.item.itemType != Item.ItemType.Rune) return false;
+        
+        if (targetInventory.currentRuneCapacity >= targetInventory.maxRuneCapacity || 
+            targetInventory.currentRuneCapacity < itemInstance.runeCost) 
+            return false;
+        
+        itemInstance.isEquipped = false;
+        targetInventory.currentRuneCapacity -= itemInstance.runeCost;
+        return true;
     }
 
     public override string GetInfo()

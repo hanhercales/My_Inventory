@@ -11,6 +11,7 @@ public class ItemInstance
     
     public int runeLevel;
     public int runeCost;
+    public bool isEquipped;
 
     public ItemInstance(Item item, int quantity)
     {
