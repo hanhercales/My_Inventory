@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewMaterialItem", menuName = "Inventory/Item/Material Item")]
 public class MaterialItem : Item
 {
-    public int materialValue;
     public MaterialTier materialTier = MaterialTier.Common;
     
     public enum MaterialTier
@@ -19,10 +18,5 @@ public class MaterialItem : Item
     public override string GetInfo()
     {
         return materialTier + "\n" + itemDescription;
-    }
-
-    public void Sell()
-    {
-        
     }
 }

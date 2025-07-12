@@ -11,6 +11,7 @@ public abstract class Item : ScriptableObject
     public string itemDescription;
     public Sprite itemIcon;
     public ItemType itemType;
+    public int itemValue;
 
     [Header("Inventory Info")] 
     public string targetInventoryName = "MainInventory";

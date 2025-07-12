@@ -7,8 +7,11 @@ public class Inventory : MonoBehaviour
     
     public InventoryType inventoryType = InventoryType.Main;
     public List<ItemInstance> content = new List<ItemInstance>();
+    
     public int maxRuneCapacity;
     public int currentRuneCapacity = 0;
+    public int currency;
+    
     public event System.Action OnInventoryChanged;
     
     public enum InventoryType
@@ -95,6 +98,13 @@ public class Inventory : MonoBehaviour
         OnInventoryChanged?.Invoke();
         return true;
     }
+
+    public bool SellItem(ItemInstance itemInstance)
+    {
+        currency += itemInstance.item.itemValue;
+        
+        return RemoveItem(itemInstance.item, itemInstance.quantity);
+    }
     
     public ItemInstance GenerateRune(EquipmentItem runeItem)
     {
@@ -120,5 +130,10 @@ public class Inventory : MonoBehaviour
     public List<ItemInstance> GetContent()
     {
         return new List<ItemInstance>(content);
+    }
+
+    public int GetSize()
+    {
+        return content.Count;
     }
 }

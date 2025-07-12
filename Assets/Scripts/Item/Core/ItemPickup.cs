@@ -5,18 +5,19 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item item;
-    public int quantity = 1;
-    public Inventory targetInventory;
+    [SerializeField] private Item item;
+    [SerializeField] private int quantity = 1;
+    [SerializeField] private Inventory targetInventory;
+    [SerializeField] private InventoryDisplay inventoryDisplay;
 
     private void Start()
     {
-        targetInventory = GameObject.Find(item.targetInventoryName).GetComponent<Inventory>();
+        targetInventory = FindObjectOfType<Inventory>();
+        inventoryDisplay = FindObjectOfType<InventoryDisplay>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("OnTriggerEnter2D");
         if (other.CompareTag("Player"))
         {
             if (targetInventory != null)
@@ -31,6 +32,9 @@ public class ItemPickup : MonoBehaviour
             {
                 targetInventory.AddItem(item, quantity);
             }
+            
+            inventoryDisplay.SetupUI();
+            
             Destroy(gameObject);
         }
     }
